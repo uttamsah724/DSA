@@ -1,0 +1,29 @@
+https://leetcode.com/problems/rotate-list/description/
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head == NULL) return NULL;
+    
+        // 1 : tail to head connect
+        int listNum = 1;
+        ListNode* temp = head;
+        while(temp->next != NULL){
+            listNum++;
+            temp = temp->next;
+        }
+        if(k==0 || k%listNum==0) return head; //corner case if no rotation required
+        temp->next = head;
+        
+        // 2 : find newTail & newHead 
+        int newTail = listNum - (k % listNum);  
+        temp = head;
+        for(int i = 0; i < newTail-1; i++){
+            temp=temp->next;
+        }
+        head = temp->next;  // newHead
+        temp->next = NULL;  // newTail
+
+        return head;
+    }
+};
