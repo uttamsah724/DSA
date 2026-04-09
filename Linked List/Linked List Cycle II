@@ -1,0 +1,31 @@
+https://leetcode.com/problems/linked-list-cycle-ii/description/
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL || head->next==NULL) return NULL;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        bool flag=false;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(fast==slow) {
+                flag=true;
+                break;
+            }
+        }
+
+        // When this "entry" pointer and the slow pointer both point to the same location
+        // this location is the node where the cycle begins    
+        if(flag){
+            ListNode* entry=head;     
+            while(slow!=entry){ 
+                slow=slow->next;
+                entry=entry->next;
+            }
+            return entry;
+        }    
+        return NULL;
+    }
+};
