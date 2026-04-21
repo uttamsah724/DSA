@@ -1,0 +1,19 @@
+https://leetcode.com/problems/binary-tree-right-side-view/description/
+
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> v;
+        int l=0;
+        preorder(root,v,l);
+        return v;
+    }
+
+     void preorder(TreeNode* root, vector<int>& v, int l){
+        if(root==NULL) return;
+
+        if(l == v.size()) v.push_back(root->val);
+        preorder(root->right,v,l+1);
+        preorder(root->left,v,l+1);
+    }
+};
