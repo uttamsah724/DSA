@@ -1,0 +1,24 @@
+https://leetcode.com/problems/diameter-of-binary-tree/description/
+
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(root==NULL) return 0;
+
+        int lh = maxDepth(root->left);
+        int rh = maxDepth(root->right);
+        int cur = lh+rh;
+
+        int ldia = max(cur,diameterOfBinaryTree(root->left));
+        int rdia = max(cur,diameterOfBinaryTree(root->right));
+
+        return max(ldia,rdia);
+    }
+
+    int maxDepth(TreeNode* root) {
+        if(root==NULL) return 0;
+        int lh = maxDepth(root->left);
+        int rh = maxDepth(root->right);
+        return 1 + max(lh,rh);
+    }
+};
