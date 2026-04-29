@@ -1,0 +1,25 @@
+https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(root==NULL) return NULL;
+        queue<Node*> q;
+        q.push(root);
+        q.push(NULL);
+
+        while(!q.empty()){
+            Node* node=q.front();
+            q.pop();
+            if(node!=NULL){
+                node->next=q.front();
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+            else if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+        return root;
+    }
+};
